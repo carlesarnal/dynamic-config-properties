@@ -225,42 +225,56 @@
             "SomeProperties": {
                 "title": "Root Type for SomeProperties",
                 "description": "",
+                "required": [
+                    "app.properties.dynamic.bool",
+                    "app.properties.dynamic.int",
+                    "app.properties.dynamic.long",
+                    "app.properties.dynamic.string",
+                    "app.properties.static.bool",
+                    "app.properties.static.int",
+                    "app.properties.static.long",
+                    "app.properties.static.string"
+                ],
                 "type": "object",
                 "properties": {
                     "app.properties.static.string": {
                         "type": "string"
                     },
                     "app.properties.static.int": {
-                        "type": "string"
+                        "format": "int32",
+                        "type": "integer"
                     },
                     "app.properties.static.bool": {
-                        "type": "string"
+                        "type": "boolean"
                     },
                     "app.properties.static.long": {
-                        "type": "string"
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "app.properties.dynamic.string": {
                         "type": "string"
                     },
                     "app.properties.dynamic.int": {
-                        "type": "string"
+                        "format": "int32",
+                        "type": "integer"
                     },
                     "app.properties.dynamic.bool": {
-                        "type": "string"
+                        "type": "boolean"
                     },
                     "app.properties.dynamic.long": {
-                        "type": "string"
+                        "format": "int64",
+                        "type": "integer"
                     }
                 },
                 "example": {
                     "app.properties.static.string": "Hello world",
-                    "app.properties.static.int": "17",
-                    "app.properties.static.bool": "true",
-                    "app.properties.static.long": "18439248",
+                    "app.properties.static.int": 17,
+                    "app.properties.static.bool": true,
+                    "app.properties.static.long": 18439248,
                     "app.properties.dynamic.string": "Hello world",
-                    "app.properties.dynamic.int": "17",
-                    "app.properties.dynamic.bool": "true",
-                    "app.properties.dynamic.long": "18439248"
+                    "app.properties.dynamic.int": 17,
+                    "app.properties.dynamic.bool": true,
+                    "app.properties.dynamic.long": 18439248
                 }
             },
             "ErrorInfo": {

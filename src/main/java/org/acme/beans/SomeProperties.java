@@ -33,100 +33,220 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @lombok.ToString
 public class SomeProperties {
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.string")
     private String appPropertiesStaticString;
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.int")
-    private String appPropertiesStaticInt;
+    private Integer appPropertiesStaticInt;
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.bool")
-    private String appPropertiesStaticBool;
+    private Boolean appPropertiesStaticBool;
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.long")
-    private String appPropertiesStaticLong;
+    private Long appPropertiesStaticLong;
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.string")
     private String appPropertiesDynamicString;
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.int")
-    private String appPropertiesDynamicInt;
+    private Integer appPropertiesDynamicInt;
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.bool")
-    private String appPropertiesDynamicBool;
+    private Boolean appPropertiesDynamicBool;
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.long")
-    private String appPropertiesDynamicLong;
+    private Long appPropertiesDynamicLong;
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.string")
     public String getAppPropertiesStaticString() {
         return appPropertiesStaticString;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.string")
     public void setAppPropertiesStaticString(String appPropertiesStaticString) {
         this.appPropertiesStaticString = appPropertiesStaticString;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.int")
-    public String getAppPropertiesStaticInt() {
+    public Integer getAppPropertiesStaticInt() {
         return appPropertiesStaticInt;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.int")
-    public void setAppPropertiesStaticInt(String appPropertiesStaticInt) {
+    public void setAppPropertiesStaticInt(Integer appPropertiesStaticInt) {
         this.appPropertiesStaticInt = appPropertiesStaticInt;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.bool")
-    public String getAppPropertiesStaticBool() {
+    public Boolean getAppPropertiesStaticBool() {
         return appPropertiesStaticBool;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.bool")
-    public void setAppPropertiesStaticBool(String appPropertiesStaticBool) {
+    public void setAppPropertiesStaticBool(Boolean appPropertiesStaticBool) {
         this.appPropertiesStaticBool = appPropertiesStaticBool;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.long")
-    public String getAppPropertiesStaticLong() {
+    public Long getAppPropertiesStaticLong() {
         return appPropertiesStaticLong;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.static.long")
-    public void setAppPropertiesStaticLong(String appPropertiesStaticLong) {
+    public void setAppPropertiesStaticLong(Long appPropertiesStaticLong) {
         this.appPropertiesStaticLong = appPropertiesStaticLong;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.string")
     public String getAppPropertiesDynamicString() {
         return appPropertiesDynamicString;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.string")
     public void setAppPropertiesDynamicString(String appPropertiesDynamicString) {
         this.appPropertiesDynamicString = appPropertiesDynamicString;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.int")
-    public String getAppPropertiesDynamicInt() {
+    public Integer getAppPropertiesDynamicInt() {
         return appPropertiesDynamicInt;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.int")
-    public void setAppPropertiesDynamicInt(String appPropertiesDynamicInt) {
+    public void setAppPropertiesDynamicInt(Integer appPropertiesDynamicInt) {
         this.appPropertiesDynamicInt = appPropertiesDynamicInt;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.bool")
-    public String getAppPropertiesDynamicBool() {
+    public Boolean getAppPropertiesDynamicBool() {
         return appPropertiesDynamicBool;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.bool")
-    public void setAppPropertiesDynamicBool(String appPropertiesDynamicBool) {
+    public void setAppPropertiesDynamicBool(Boolean appPropertiesDynamicBool) {
         this.appPropertiesDynamicBool = appPropertiesDynamicBool;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.long")
-    public String getAppPropertiesDynamicLong() {
+    public Long getAppPropertiesDynamicLong() {
         return appPropertiesDynamicLong;
     }
 
+    /**
+     * 
+     * (Required)
+     * 
+     */
     @JsonProperty("app.properties.dynamic.long")
-    public void setAppPropertiesDynamicLong(String appPropertiesDynamicLong) {
+    public void setAppPropertiesDynamicLong(Long appPropertiesDynamicLong) {
         this.appPropertiesDynamicLong = appPropertiesDynamicLong;
     }
 
