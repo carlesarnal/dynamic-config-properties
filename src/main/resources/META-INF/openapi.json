@@ -175,6 +175,9 @@
                             }
                         },
                         "description": "The property value."
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
                     }
                 },
                 "operationId": "getProperty",
@@ -192,6 +195,22 @@
                     "required": true
                 }
             ]
+        },
+        "/test": {
+            "summary": "Endpoint used to test injected properties",
+            "get": {
+                "tags": [
+                    "Test"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content."
+                    }
+                },
+                "operationId": "test",
+                "summary": "Test properties",
+                "description": "Operation used to print out a bunch of injected properties."
+            }
         }
     },
     "components": {
