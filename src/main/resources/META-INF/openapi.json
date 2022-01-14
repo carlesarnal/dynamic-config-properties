@@ -204,6 +204,13 @@
                 ],
                 "responses": {
                     "204": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SomeProperties"
+                                }
+                            }
+                        },
                         "description": "No content."
                     }
                 },
@@ -215,6 +222,47 @@
     },
     "components": {
         "schemas": {
+            "SomeProperties": {
+                "title": "Root Type for SomeProperties",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "app.properties.static.string": {
+                        "type": "string"
+                    },
+                    "app.properties.static.int": {
+                        "type": "string"
+                    },
+                    "app.properties.static.bool": {
+                        "type": "string"
+                    },
+                    "app.properties.static.long": {
+                        "type": "string"
+                    },
+                    "app.properties.dynamic.string": {
+                        "type": "string"
+                    },
+                    "app.properties.dynamic.int": {
+                        "type": "string"
+                    },
+                    "app.properties.dynamic.bool": {
+                        "type": "string"
+                    },
+                    "app.properties.dynamic.long": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "app.properties.static.string": "Hello world",
+                    "app.properties.static.int": "17",
+                    "app.properties.static.bool": "true",
+                    "app.properties.static.long": "18439248",
+                    "app.properties.dynamic.string": "Hello world",
+                    "app.properties.dynamic.int": "17",
+                    "app.properties.dynamic.bool": "true",
+                    "app.properties.dynamic.long": "18439248"
+                }
+            },
             "ErrorInfo": {
                 "title": "Root Type for ErrorInfo",
                 "description": "Details about a specific error returned by the server.",
