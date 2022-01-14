@@ -159,6 +159,39 @@
                     "required": true
                 }
             ]
+        },
+        "/properties/{propertyName}": {
+            "get": {
+                "tags": [
+                    "Properies"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConfigurationProperty"
+                                }
+                            }
+                        },
+                        "description": "The property value."
+                    }
+                },
+                "operationId": "getProperty",
+                "summary": "Get property value",
+                "description": "Gets the value of a property.  Returns the value of any property, including\nnon-dynamic properties."
+            },
+            "parameters": [
+                {
+                    "name": "propertyName",
+                    "description": "The name of a config property.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
         }
     },
     "components": {
