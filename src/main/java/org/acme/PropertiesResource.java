@@ -9,7 +9,7 @@ import org.acme.beans.ConfigurationProperty;
 /**
  * A JAX-RS interface.  An implementation of this interface must be provided.
  */
-@Path("/apis/studio/v1/properties")
+@Path("/properties")
 public interface PropertiesResource {
   /**
    * Gets the value of a property.  Returns the value of any property, including

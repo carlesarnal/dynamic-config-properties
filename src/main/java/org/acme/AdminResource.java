@@ -15,7 +15,7 @@ import org.acme.beans.UpdateConfigurationProperty;
 /**
  * A JAX-RS interface.  An implementation of this interface must be provided.
  */
-@Path("/apis/studio/v1/admin")
+@Path("/admin")
 public interface AdminResource {
   /**
    * Returns a list of all configuration properties that have been set.  The list is not paged.
