@@ -1,0 +1,301 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Dynamic Config Properties API",
+        "version": "1.0.0",
+        "description": "Managed application services API Studio.",
+        "contact": {
+            "name": "Apicurio",
+            "email": "apicurio@lists.jboss.org"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "paths": {
+        "/admin/config/properties": {
+            "summary": "Manage configuration properties.",
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ConfigurationProperty"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "On a successful response, returns a list of configuration properties."
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "operationId": "listConfigProperties",
+                "summary": "List all configuration properties",
+                "description": "Returns a list of all configuration properties that have been set.  The list is not paged.\n\nThis operation may fail for one of the following reasons:\n\n* A server error occurred (HTTP error `500`)\n"
+            },
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ConfigurationProperty"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Returned if the configuration property is correctly set."
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "operationId": "setConfigProperty",
+                "summary": "Set a configuration property",
+                "description": "Sets a configuration property using a name and value.  If the configuration property is\nalready set, it will be overwritten.  Only editable configuration properties can be \nconfigured using the REST API.\n\nThis operation may fail for one of the following reasons:\n\n* No property with the given name exists to be set (HTTP error `404`)\n* A server error occurred (HTTP error `500`)\n"
+            }
+        },
+        "/admin/config/properties/{propertyName}": {
+            "summary": "Manage a single configuration property (by name).",
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ConfigurationProperty"
+                                }
+                            }
+                        },
+                        "description": "The configuration property value."
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "operationId": "getConfigProperty",
+                "summary": "Get the value of a configuration property",
+                "description": "Returns the value of a single configuration property.\n\nThis operation may fail for one of the following reasons:\n\n* Property not found or not configured (HTTP error `404`)\n* A server error occurred (HTTP error `500`)\n"
+            },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateConfigurationProperty"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The configuration property was updated."
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "operationId": "updateConfigProperty",
+                "summary": "Update a configuration property",
+                "description": "Updates the value of a single configuration property.\n\nThis operation may fail for one of the following reasons:\n\n* Property not found or not configured (HTTP error `404`)\n* A server error occurred (HTTP error `500`)\n"
+            },
+            "delete": {
+                "tags": [
+                    "Admin"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "The configuration property was deleted."
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "operationId": "deleteConfigProperty",
+                "summary": "Delete a configuration property",
+                "description": "Deletes the value of a single configuration property.  This will return the property to\nits default value (see external documentation for supported properties and their default\nvalues).\n\nThis operation may fail for one of the following reasons:\n\n* Property not found or not configured (HTTP error `404`)\n* A server error occurred (HTTP error `500`)\n"
+            },
+            "parameters": [
+                {
+                    "name": "propertyName",
+                    "description": "The name of a configuration property.",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "ErrorInfo": {
+                "title": "Root Type for ErrorInfo",
+                "description": "Details about a specific error returned by the server.",
+                "required": [
+                ],
+                "type": "object",
+                "properties": {
+                    "error_code": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "detail": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "error_code": 500,
+                    "message": "An error occurred on the server."
+                }
+            },
+            "ConfigurationProperty": {
+                "title": "Root Type for ConfigurationProperty",
+                "description": "",
+                "required": [
+                    "name",
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "name": "registry.auth.owner-only-authorization",
+                    "value": "true"
+                }
+            },
+            "UpdateConfigurationProperty": {
+                "title": "Root Type for UpdateConfigurationProperty",
+                "description": "",
+                "required": [
+                    "value"
+                ],
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "value": "true"
+                }
+            }
+        },
+        "responses": {
+            "BadRequest": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ErrorInfo"
+                        }
+                    }
+                },
+                "description": "Common response for all operations that can return a `400` error."
+            },
+            "NotFound": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ErrorInfo"
+                        }
+                    }
+                },
+                "description": "The response returned when something is requested but cannot be found."
+            },
+            "ServerError": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ErrorInfo"
+                        }
+                    }
+                },
+                "description": "The response sent from the server when an unexpected error occurs (for example \na database connection error)."
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Artifacts",
+            "description": "Operations related to managing artifacts."
+        },
+        {
+            "name": "Teams",
+            "description": "Operations related to teams."
+        }
+    ],
+    "x-codegen": {
+        "contextRoot": "/apis/studio/v1",
+        "bean-annotations": [
+            "io.quarkus.runtime.annotations.RegisterForReflection",
+            {
+                "annotation": "lombok.Builder",
+                "excludeEnums": true
+            },
+            {
+                "annotation": "lombok.AllArgsConstructor",
+                "excludeEnums": true
+            },
+            {
+                "annotation": "lombok.NoArgsConstructor",
+                "excludeEnums": true
+            },
+            {
+                "annotation": "lombok.EqualsAndHashCode",
+                "excludeEnums": true
+            },
+            {
+                "annotation": "lombok.ToString",
+                "excludeEnums": true
+            }
+        ]
+    }
+}
