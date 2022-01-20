@@ -33,7 +33,7 @@ import javax.inject.Qualifier;
 @Documented
 @Retention(RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})
-public @interface DynamicConfigProperty {
+public @interface Dynamic {
 
     final static String UNCONFIGURED_VALUE = "io.apicurio.common.apps.config.UNCONFIGURED_VALUE";
 
