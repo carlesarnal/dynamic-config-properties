@@ -16,20 +16,10 @@
 
 package org.acme;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Member;
-import java.lang.reflect.Type;
-import java.util.Set;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-
-import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.Annotated;
-import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import io.smallrye.config.inject.ConfigProducer;
@@ -43,72 +33,12 @@ import io.smallrye.config.inject.ConfigProducerUtil;
 @ApplicationScoped
 public class DynamicConfigProducer extends ConfigProducer {
 
+    @Override
     @Dependent
     @Produces
     @ConfigProperty
     @Dynamic
     protected <T> Supplier<T> produceSupplierConfigValue(InjectionPoint ip) {
-        InjectionPoint ip2 = new InjectionPoint() {
-
-            private Set<Annotation> qualifiers;
-
-            @Override
-            public boolean isTransient() {
-                return ip.isTransient();
-            }
-
-            @Override
-            public boolean isDelegate() {
-                return ip.isDelegate();
-            }
-
-            @Override
-            public Type getType() {
-                return ip.getType();
-            }
-
-            @Override
-            public Set<Annotation> getQualifiers() {
-                if (qualifiers == null) {
-                    qualifiers = ip.getQualifiers().stream().map(qualifier -> {
-                        if (qualifier.annotationType().equals(ConfigProperty.class)) {
-                            ConfigProperty dcp = (ConfigProperty) qualifier;
-                            return new ConfigProperty() {
-                                @Override
-                                public Class<? extends Annotation> annotationType() {
-                                    return ConfigProperty.class;
-                                }
-                                @Override
-                                public String name() {
-                                    return dcp.name();
-                                }
-                                @Override
-                                public String defaultValue() {
-                                    return dcp.defaultValue();
-                                }
-                            };
-                        }
-                        return qualifier;
-                    }).collect(Collectors.toSet());
-                }
-                return qualifiers;
-            }
-
-            @Override
-            public Member getMember() {
-                return ip.getMember();
-            }
-
-            @Override
-            public Bean<?> getBean() {
-                return ip.getBean();
-            }
-
-            @Override
-            public Annotated getAnnotated() {
-                return ip.getAnnotated();
-            }
-        };
-        return () -> ConfigProducerUtil.getValue(ip2, getConfig());
+        return () -> ConfigProducerUtil.getValue(ip, getConfig());
     }
 }
