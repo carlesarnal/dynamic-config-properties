@@ -23,15 +23,16 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import javax.annotation.Priority;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
 
-import org.eclipse.microprofile.config.Config;
+import io.smallrye.config.inject.ConfigProducer;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import io.smallrye.config.inject.ConfigProducerUtil;
@@ -40,18 +41,12 @@ import io.smallrye.config.inject.ConfigProducerUtil;
  * @author eric.wittmann@gmail.com
  */
 @ApplicationScoped
-public class DynamicConfigProducer {
-
-    @Inject
-    Config config;
-
-    protected Config getConfig() {
-        return config;
-    }
+public class DynamicConfigProducer extends ConfigProducer {
 
     @Dependent
     @Produces
-    @DynamicConfigProperty
+    @ConfigProperty
+    @Dynamic
     protected <T> Supplier<T> produceSupplierConfigValue(InjectionPoint ip) {
         InjectionPoint ip2 = new InjectionPoint() {
 
@@ -76,8 +71,8 @@ public class DynamicConfigProducer {
             public Set<Annotation> getQualifiers() {
                 if (qualifiers == null) {
                     qualifiers = ip.getQualifiers().stream().map(qualifier -> {
-                        if (qualifier.annotationType().equals(DynamicConfigProperty.class)) {
-                            DynamicConfigProperty dcp = (DynamicConfigProperty) qualifier;
+                        if (qualifier.annotationType().equals(ConfigProperty.class)) {
+                            ConfigProperty dcp = (ConfigProperty) qualifier;
                             return new ConfigProperty() {
                                 @Override
                                 public Class<? extends Annotation> annotationType() {
@@ -116,6 +111,4 @@ public class DynamicConfigProducer {
         };
         return () -> ConfigProducerUtil.getValue(ip2, getConfig());
     }
-
-
 }
