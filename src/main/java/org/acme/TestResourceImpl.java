@@ -16,8 +16,9 @@
 
 package org.acme;
 
+import java.util.function.Supplier;
+
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Provider;
 
 import org.acme.beans.SomeProperties;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -39,14 +40,14 @@ public class TestResourceImpl implements TestResource {
     @ConfigProperty(name="app.properties.static.bool", defaultValue="false")
     Boolean staticBool;
 
-    @ConfigProperty(name="app.properties.dynamic.string", defaultValue="_DEFAULT_")
-    Provider<String> dynamicString;
-    @ConfigProperty(name="app.properties.dynamic.int", defaultValue="0")
-    Provider<Integer> dynamicInt;
-    @ConfigProperty(name="app.properties.dynamic.long", defaultValue="0")
-    Provider<Long> dynamicLong;
-    @ConfigProperty(name="app.properties.dynamic.bool", defaultValue="false")
-    Provider<Boolean> dynamicBool;
+    @DynamicConfigProperty(name="app.properties.dynamic.string", defaultValue="_DEFAULT_")
+    Supplier<String> dynamicString;
+    @DynamicConfigProperty(name="app.properties.dynamic.int", defaultValue="0")
+    Supplier<Integer> dynamicInt;
+    @DynamicConfigProperty(name="app.properties.dynamic.long", defaultValue="0")
+    Supplier<Long> dynamicLong;
+    @DynamicConfigProperty(name="app.properties.dynamic.bool", defaultValue="false")
+    Supplier<Boolean> dynamicBool;
 
     /**
      * @see org.acme.TestResource#test()

@@ -39,6 +39,16 @@ public abstract class AbstractResourceTest {
             .statusCode(204);
     }
 
+    protected void assertDynamicPropertyInvalid(String name, String value) {
+        ConfigurationProperty property = ConfigurationProperty.builder().name(name).value(value).build();
+        given().body(property)
+            .when()
+                .contentType(ContentType.JSON)
+                .post("/admin/config/properties")
+            .then()
+            .statusCode(409);
+    }
+
     protected void setStaticProperty(String name, String value) {
         ConfigurationProperty property = ConfigurationProperty.builder().name(name).value(value).build();
         given().body(property)

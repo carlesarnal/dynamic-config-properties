@@ -1,6 +1,7 @@
 package org.acme;
 
 import org.acme.beans.SomeProperties;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -20,12 +21,21 @@ public class PropertiesTest extends AbstractResourceTest {
 
         printPropertyValues();
 
+        SomeProperties someProperties = getSomeProperties();
+        Assertions.assertEquals("Foo Bar", someProperties.getAppPropertiesStaticString());
+        Assertions.assertEquals(10, someProperties.getAppPropertiesStaticInt());
+        Assertions.assertEquals(Boolean.TRUE, someProperties.getAppPropertiesStaticBool());
+        Assertions.assertEquals(182934758136113l, someProperties.getAppPropertiesStaticLong());
+
+        // Note: once everything is working as we want, attempting to update a static property
+        //       should fail with a 409 (conflict)
         setStaticProperty("app.properties.static.string", "new value");
+
+        // Note: once everything is working as we want, attempting to update a dynamic property
+        //       with a value that does not match the property's type should fail with a 409 (conflict)
+        assertDynamicPropertyInvalid("app.properties.dynamic.bool", "INVALID_VALUE");
     }
 
-    /**
-     *
-     */
     public void printPropertyValues() {
         SomeProperties someProperties = getSomeProperties();
         System.out.println("---");
