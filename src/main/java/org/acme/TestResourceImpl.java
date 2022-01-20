@@ -40,17 +40,13 @@ public class TestResourceImpl implements TestResource {
     @ConfigProperty(name="app.properties.static.bool", defaultValue="false")
     Boolean staticBool;
 
-    @Dynamic
-    @ConfigProperty(name="app.properties.dynamic.string", defaultValue="_DEFAULT_")
+    @Dynamic @ConfigProperty(name="app.properties.dynamic.string", defaultValue="_DEFAULT_")
     Supplier<String> dynamicString;
-    @Dynamic
-    @ConfigProperty(name="app.properties.dynamic.int", defaultValue="0")
+    @Dynamic @ConfigProperty(name="app.properties.dynamic.int", defaultValue="0")
     Supplier<Integer> dynamicInt;
-    @Dynamic
-    @ConfigProperty(name="app.properties.dynamic.long", defaultValue="0")
+    @Dynamic @ConfigProperty(name="app.properties.dynamic.long", defaultValue="0")
     Supplier<Long> dynamicLong;
-    @Dynamic
-    @ConfigProperty(name="app.properties.dynamic.bool", defaultValue="false")
+    @Dynamic @ConfigProperty(name="app.properties.dynamic.bool", defaultValue="false")
     Supplier<Boolean> dynamicBool;
 
     /**

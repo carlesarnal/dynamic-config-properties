@@ -23,7 +23,6 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.util.Nonbinding;
 import javax.inject.Qualifier;
 
 /**
@@ -34,13 +33,5 @@ import javax.inject.Qualifier;
 @Retention(RUNTIME)
 @Target({ElementType.FIELD, ElementType.METHOD})
 public @interface Dynamic {
-
-    final static String UNCONFIGURED_VALUE = "io.apicurio.common.apps.config.UNCONFIGURED_VALUE";
-
-    @Nonbinding
-    String name() default "";
-
-    @Nonbinding
-    String defaultValue() default UNCONFIGURED_VALUE;
 
 }
